@@ -15,128 +15,139 @@
 
 <style>
 /* ============================================================
-   Param Gogia — Warm Editorial résumé (terracotta on cream)
-   Default = professional document. Game mode = opt-in toggle.
+   Param Gogia — Minimalist résumé (ink on white)
+   Default = clean, quiet document. Game mode = opt-in ("bored").
    ============================================================ */
 :root{
-  --bg-primary:#f4f3ee; --bg-secondary:#eeede6; --bg-inverse:#191817;
-  --text-primary:#191817; --text-secondary:#5a554e; --text-muted:#8a847a;
-  --accent:#c96442; --accent-hover:#b55738; --accent-soft:#e89268;
-  --border:#d8d3c8; --success:#6b7a3d;
+  --bg:#ffffff; --bg-soft:#fafaf9; --ink:#111110; --ink-2:#5f5d58; --ink-3:#a4a19a;
+  --line:#ececea; --line-2:#dddbd6; --success:#1f9d55;
   --serif:"Fraunces","Iowan Old Style",Georgia,serif;
   --sans:"Inter",-apple-system,BlinkMacSystemFont,sans-serif;
   --mono:"JetBrains Mono",ui-monospace,"SF Mono",monospace;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{background:var(--bg-primary);color:var(--text-primary);font-family:var(--sans);
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);
   font-weight:400;line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-::selection{background:var(--accent);color:var(--bg-primary)}
+::selection{background:var(--ink);color:var(--bg)}
 a{color:inherit;text-decoration:none}
 img{max-width:100%}
 
 /* ---------- layout shell ---------- */
-.wrap{max-width:1280px;margin:0 auto;padding:0 clamp(20px,4vw,48px)}
-.eyebrow{font-family:var(--sans);font-weight:500;font-size:13px;letter-spacing:.02em;
-  text-transform:uppercase;color:var(--text-muted)}
-h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.015em;text-wrap:balance}
+.wrap{max-width:1320px;margin:0 auto;padding:0 clamp(24px,5vw,80px)}
+h1,h2,h3{font-weight:600;letter-spacing:-.02em;line-height:1.08;text-wrap:balance}
 p{text-wrap:pretty}
-.section{padding:clamp(56px,9vw,96px) 0;border-top:1px solid var(--border)}
-.section:first-of-type{border-top:none}
-.section > .eyebrow{margin-bottom:28px}
+.section{padding-top:clamp(56px,9vw,104px);padding-bottom:clamp(56px,9vw,104px);border-top:1px solid var(--line)}
+/* numbered section header */
+.shead{font-family:var(--mono);font-size:13px;letter-spacing:.01em;color:var(--ink-3);
+  margin-bottom:clamp(34px,5vw,52px);display:flex;align-items:baseline;gap:11px}
+.shead b{color:var(--ink);font-weight:500}
 
 /* ---------- top nav ---------- */
-.nav{position:sticky;top:0;z-index:20;background:rgba(244,243,238,.86);backdrop-filter:blur(10px);
-  border-bottom:1px solid var(--border)}
-.nav-inner{max-width:1280px;margin:0 auto;padding:15px clamp(20px,4vw,48px);
+.nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.82);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line)}
+.nav-inner{max-width:1320px;margin:0 auto;padding:18px clamp(24px,5vw,80px);
   display:flex;align-items:center;justify-content:space-between;gap:16px}
-.nav .name{font-family:var(--serif);font-weight:500;font-size:17px;letter-spacing:-.01em}
-.nav-links{display:flex;align-items:center;gap:22px}
-.nav-links a{font-size:14px;color:var(--text-secondary);padding:4px 0;border-bottom:1.5px solid transparent;transition:color .2s,border-color .2s}
-.nav-links a:hover{color:var(--text-primary);border-color:var(--accent)}
-@media(max-width:600px){.nav-links a.hide-sm{display:none}}
+.nav .name{font-weight:600;font-size:15px;letter-spacing:-.01em}
+.nav-links{display:flex;align-items:center;gap:26px}
+.nav-links a{font-size:14px;color:var(--ink-2);transition:color .2s}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a.nav-game{cursor:pointer;color:var(--ink);border-bottom:1.5px solid var(--ink)}
+.nav-links a.nav-game:hover{opacity:.65}
+@media(max-width:560px){.nav-links a.hide-sm{display:none}.nav-links{gap:18px}}
 
 /* ---------- buttons ---------- */
-.btn{font-family:var(--sans);font-weight:500;font-size:14px;letter-spacing:.01em;
-  padding:10px 18px;border-radius:6px;border:1px solid transparent;cursor:pointer;
-  display:inline-flex;align-items:center;gap:8px;transition:background .2s,border-color .2s,color .2s}
-.btn-primary{background:var(--accent);color:var(--bg-primary)}
-.btn-primary:hover{background:var(--accent-hover)}
-.btn-secondary{border-color:var(--border);color:var(--text-primary);background:transparent}
-.btn-secondary:hover{background:var(--bg-secondary)}
+.btn{font-family:var(--sans);font-weight:500;font-size:14px;
+  padding:12px 20px;border:1px solid var(--ink);cursor:pointer;
+  display:inline-flex;align-items:center;gap:9px;transition:background .2s,color .2s;
+  background:transparent;color:var(--ink)}
+.btn-primary{background:var(--ink);color:var(--bg)}
+.btn-primary:hover{background:transparent;color:var(--ink)}
+.btn-secondary:hover{background:var(--ink);color:var(--bg)}
 .btn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.8}
 
 /* ---------- hero ---------- */
-.hero{padding-top:clamp(56px,10vw,104px);padding-bottom:clamp(40px,7vw,72px)}
-.hero .eyebrow{margin-bottom:20px}
-.hero h1{font-size:clamp(40px,9vw,62px);line-height:1.02;margin-bottom:24px}
-.hero h1 em{font-style:italic;color:var(--accent)}
-.hero .lede{font-size:clamp(17px,2.4vw,21px);line-height:1.6;color:var(--text-secondary);max-width:70ch}
-.hero .lede b{color:var(--text-primary);font-weight:600}
-.status{display:inline-flex;align-items:center;gap:9px;font-size:13px;letter-spacing:.01em;
-  color:var(--text-secondary);border:1px solid var(--border);border-radius:30px;padding:6px 14px;margin-bottom:28px}
+.hero{padding-top:clamp(64px,12vw,128px);padding-bottom:clamp(48px,8vw,80px)}
+.hero .eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.01em;color:var(--ink-3);margin-bottom:24px}
+.hero h1{font-size:clamp(46px,11vw,88px);line-height:.96;letter-spacing:-.04em;margin-bottom:26px}
+.hero .lede{font-size:clamp(17px,2.3vw,20px);line-height:1.62;color:var(--ink-2);max-width:62ch}
+.hero .lede b{color:var(--ink);font-weight:600}
+.status{display:inline-flex;align-items:center;gap:9px;font-size:13px;color:var(--ink-2);margin-bottom:28px}
 .status .dot{width:7px;height:7px;border-radius:50%;background:var(--success)}
-.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:40px}
 
 /* ---------- stats ---------- */
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:48px}
-.stat .n{font-family:var(--serif);font-weight:500;font-size:clamp(28px,5vw,40px);line-height:1}
-.stat .n .u{color:var(--accent);font-size:.55em;font-family:var(--sans);font-weight:500;margin-left:1px}
-.stat .l{font-size:13px;color:var(--text-muted);margin-top:8px;line-height:1.35}
-@media(max-width:600px){.stats{grid-template-columns:1fr 1fr;gap:28px 24px}}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);
+  border:1px solid var(--line);margin-top:64px}
+.stat{background:var(--bg);padding:22px 20px}
+.stat .n{font-weight:600;font-size:clamp(26px,4.5vw,36px);line-height:1;letter-spacing:-.02em}
+.stat .n .u{color:var(--ink-3);font-size:.55em;font-weight:500;margin-left:1px}
+.stat .l{font-size:12.5px;color:var(--ink-3);margin-top:9px;line-height:1.35}
+@media(max-width:560px){.stats{grid-template-columns:1fr 1fr}}
 
 /* ---------- experience / projects items ---------- */
-.entry{display:grid;grid-template-columns:150px 1fr;gap:24px;padding:26px 0;border-top:1px solid var(--border)}
+.entry{display:grid;grid-template-columns:170px 1fr;gap:48px;padding:34px 0;border-top:1px solid var(--line)}
 .entry:first-of-type{border-top:none;padding-top:0}
-.entry .when{font-family:var(--mono);font-size:13px;color:var(--text-muted);padding-top:5px}
-.entry .co{font-family:var(--serif);font-size:21px;font-weight:500;line-height:1.2}
-.entry .role{font-size:14px;font-weight:500;color:var(--accent);margin-top:3px}
-.entry .desc{font-size:15px;line-height:1.6;color:var(--text-secondary);margin-top:10px;max-width:74ch}
-.entry .desc b{color:var(--text-primary);font-weight:600}
-.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
-.tag{font-family:var(--mono);font-size:12px;color:var(--text-secondary);
-  border:1px solid var(--border);border-radius:5px;padding:3px 9px}
-@media(max-width:600px){.entry{grid-template-columns:1fr;gap:6px}.entry .when{padding-top:0;order:-1}}
+.entry .when{font-family:var(--mono);font-size:12.5px;color:var(--ink-3);padding-top:5px}
+.entry .co{font-size:21px;font-weight:600;line-height:1.2;letter-spacing:-.01em}
+.entry .role{font-size:14px;color:var(--ink-2);margin-top:4px}
+.entry .desc{font-size:15.5px;line-height:1.7;color:var(--ink-2);margin-top:13px;max-width:72ch}
+.entry .desc b{color:var(--ink);font-weight:600}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.tag{font-family:var(--mono);font-size:11.5px;color:var(--ink-2);
+  border:1px solid var(--line-2);padding:3px 9px}
+@media(max-width:560px){.entry{grid-template-columns:1fr;gap:8px}.entry .when{padding-top:0;order:-1}}
 
 /* ---------- skills ---------- */
-.skills{display:grid;grid-template-columns:1fr 1fr;gap:32px 48px}
-.skill-grp h3{font-size:14px;font-family:var(--sans);font-weight:500;letter-spacing:.02em;
-  text-transform:uppercase;color:var(--accent);margin-bottom:12px}
-.skill-grp .row{display:flex;flex-wrap:wrap;gap:6px 16px}
-.skill-grp .row span{font-size:15px;color:var(--text-secondary)}
-@media(max-width:600px){.skills{grid-template-columns:1fr;gap:28px}}
+.skills{display:grid;grid-template-columns:1fr 1fr;gap:42px 80px}
+.skill-grp h3{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ink-3);margin-bottom:14px}
+.skill-grp .row{display:flex;flex-wrap:wrap;gap:8px 16px}
+.skill-grp .row span{font-size:15px;color:var(--ink-2)}
+@media(max-width:560px){.skills{grid-template-columns:1fr;gap:28px}}
 
 /* ---------- honours ---------- */
-.honours{display:grid;grid-template-columns:1fr 1fr;gap:10px 32px}
+.honours{display:grid;grid-template-columns:1fr 1fr;gap:0 80px}
 .honour{display:flex;align-items:baseline;justify-content:space-between;gap:12px;
-  padding:11px 0;border-bottom:1px solid var(--border);font-size:15px}
-.honour .mark{font-family:var(--mono);font-size:12px;white-space:nowrap}
-.honour .mark.w{color:var(--accent)}
-.honour .mark.r{color:var(--text-secondary)}
-.honour .mark.f{color:var(--text-muted)}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
-.chip{font-size:14px;color:var(--text-secondary);border:1px solid var(--border);border-radius:30px;padding:6px 14px}
-.chip b{color:var(--text-primary);font-weight:600}
-@media(max-width:600px){.honours{grid-template-columns:1fr}}
+  padding:13px 0;border-bottom:1px solid var(--line);font-size:15px}
+.honour .mark{font-family:var(--mono);font-size:11.5px;white-space:nowrap;color:var(--ink-3)}
+.honour .mark.w{color:var(--ink)}
+.honour .mark.r{color:var(--ink-2)}
+.honour .mark.f{color:var(--ink-3)}
+.chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:28px}
+.chip{font-size:13.5px;color:var(--ink-2);border:1px solid var(--line-2);padding:7px 13px}
+.chip b{color:var(--ink);font-weight:600}
+@media(max-width:560px){.honours{grid-template-columns:1fr}}
 
 /* ---------- contact ---------- */
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);
-  border:1px solid var(--border);border-radius:8px;overflow:hidden}
-.contact-grid a{background:var(--bg-secondary);padding:20px 22px;display:flex;flex-direction:column;gap:5px;transition:background .2s}
-.contact-grid a:hover{background:#e7e5dc}
-.contact-grid .k{font-family:var(--sans);font-weight:500;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--text-muted)}
-.contact-grid .v{font-size:16px;color:var(--text-primary)}
-.contact-grid .v .arr{color:var(--accent)}
-.edu{font-size:15px;line-height:1.7;color:var(--text-secondary);margin-top:28px}
-.edu b{color:var(--text-primary);font-weight:600}
-@media(max-width:600px){.contact-grid{grid-template-columns:1fr}}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);
+  border:1px solid var(--line)}
+.contact-grid a{background:var(--bg);padding:22px;display:flex;flex-direction:column;gap:7px;transition:background .2s}
+.contact-grid a:hover{background:var(--bg-soft)}
+.contact-grid .k{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.contact-grid .v{font-size:16px;color:var(--ink);display:flex;justify-content:space-between;gap:10px}
+.contact-grid .v .arr{color:var(--ink-3)}
+.edu{font-size:15px;line-height:1.7;color:var(--ink-2);margin-top:30px}
+.edu b{color:var(--ink);font-weight:600}
+@media(max-width:560px){.contact-grid{grid-template-columns:1fr}}
+
+/* ---------- bored? (game entry) ---------- */
+.bored h2{font-size:clamp(34px,7vw,60px);letter-spacing:-.035em;line-height:1.02;margin-bottom:20px}
+.bored p{font-size:16px;color:var(--ink-2);max-width:48ch;margin-bottom:32px}
+.bored .play{font-family:var(--mono);font-size:13.5px;letter-spacing:.02em;color:var(--ink);
+  border:1px solid var(--ink);background:transparent;padding:15px 24px;cursor:pointer;
+  display:inline-flex;align-items:center;gap:11px;transition:background .2s,color .2s}
+.bored .play:hover{background:var(--ink);color:var(--bg)}
+.bored .play .ar{transition:transform .25s}
+.bored .play:hover .ar{transform:translate(3px,-3px)}
 
 /* ---------- footer ---------- */
-.foot{padding:40px 0 64px;border-top:1px solid var(--border);
+.foot{padding:40px 0 64px;border-top:1px solid var(--line);
   display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
-.foot .c{font-size:13px;color:var(--text-muted)}
-.foot .play{font-size:14px;color:var(--text-secondary);border-bottom:1.5px solid transparent;cursor:pointer;background:none;border-top:none;border-left:none;border-right:none;font-family:var(--sans);padding:2px 0;transition:color .2s,border-color .2s}
-.foot .play:hover{color:var(--accent);border-color:var(--accent)}
+.foot .c{font-size:13px;color:var(--ink-3)}
+.foot .top{font-size:13px;color:var(--ink-3);cursor:pointer;background:none;border:none;
+  font-family:var(--sans);transition:color .2s}
+.foot .top:hover{color:var(--ink)}
 
 /* =========================================================
    GAME MODE — hidden by default, shown on toggle.
@@ -259,9 +270,10 @@ body.in-game #gameMode{display:block}
     <div class="nav-inner">
       <span class="name">Param Gogia</span>
       <div class="nav-links">
-        <a href="#experience" class="hide-sm">Experience</a>
+        <a href="#experience" class="hide-sm">Work</a>
         <a href="#projects" class="hide-sm">Projects</a>
         <a href="#contact">Contact</a>
+        <a class="js-game nav-game">Bored? ↗</a>
         <a href="Param_Gogia_Resume.pdf" download>Résumé ↓</a>
       </div>
     </div>
@@ -270,17 +282,15 @@ body.in-game #gameMode{display:block}
   <header class="hero wrap">
     <div class="status"><span class="dot"></span> Available · July 2026</div>
     <p class="eyebrow">Software Engineer · AI &amp; Agents · Mumbai, India</p>
-    <h1>Param <em>Gogia.</em></h1>
-    <p class="lede">I build <b>production-grade LLM agents</b> at <b>BrowserStack</b> — async APIs, Kubernetes pipelines, thousands of LLM calls per second for Fortune&nbsp;500 clients. Final-year B.Tech in Computer Science (AI/ML) at SPIT Mumbai, <b>Rank&nbsp;2</b> with a 9.47 CGPA. I ship fast, and I ship deep.</p>
+    <h1>Param Gogia</h1>
+    <p class="lede">I build <b>production-grade LLM agents</b> at <b>BrowserStack</b> — async APIs, Kubernetes pipelines, thousands of LLM calls per second for Fortune&nbsp;500 clients. Final-year B.Tech in Computer Science (AI/ML) at SPIT Mumbai, <b>Rank&nbsp;2</b> with a 9.47 CGPA, and a <b>14× hackathon winner</b>. I ship fast, and I ship deep.</p>
     <div class="hero-actions">
       <a class="btn btn-primary" href="Param_Gogia_Resume.pdf" download>
         <svg viewBox="0 0 24 24"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
         Download résumé
       </a>
-      <button class="btn btn-secondary" id="enterGame">
-        <svg viewBox="0 0 24 24"><path d="M5 12h14M5 8h6M5 16h10"/></svg>
-        Explore the interactive version
-      </button>
+      <button class="btn btn-secondary js-game">Bored? Fly through it ↗</button>
+      <a class="btn btn-secondary" href="#contact">Get in touch</a>
     </div>
 
     <div class="stats">
@@ -292,7 +302,7 @@ body.in-game #gameMode{display:block}
   </header>
 
   <section class="section wrap" id="experience">
-    <p class="eyebrow">Experience</p>
+    <p class="shead"><span>01</span> <b>Experience</b></p>
     <div class="entry"><div class="when">Jan 2026 — Present</div><div><div class="co">BrowserStack</div><div class="role">AI SDE Intern · Mumbai</div><div class="desc">Built <b>production-grade AI agents</b> for a B2B SaaS product serving Fortune 500 clients, scaling to <b>thousands of LLM calls/sec</b>. Engineered agentic features end-to-end with LLM frameworks, integrated via async APIs and Kubernetes pipelines.</div></div></div>
     <div class="entry"><div class="when">May 2025 — Aug 2025</div><div><div class="co">Russell Investments</div><div class="role">Summer Intern, App Development</div><div class="desc">At a global asset manager with <b>$320B+ AUM</b>, built a scalable automation tool orchestrating data from external vendor APIs into one consolidated format for the Enterprise Data Management team.</div></div></div>
     <div class="entry"><div class="when">Jan 2025 — May 2025</div><div><div class="co">Bidyut Innovation</div><div class="role">Software Developer Intern · Remote</div><div class="desc">Engineered an <b>AI-driven EdTech platform</b> reaching <b>20,000+ students</b> across 30+ schools in 3+ countries. Deployed on AWS EC2 + S3; cut onboarding time by 30%.</div></div></div>
@@ -302,14 +312,14 @@ body.in-game #gameMode{display:block}
   </section>
 
   <section class="section wrap" id="projects">
-    <p class="eyebrow">Selected projects</p>
+    <p class="shead"><span>02</span> <b>Selected work</b></p>
     <div class="entry"><div class="when">Web3 · AI agents</div><div><div class="co">RECreate</div><div class="role">B2B / P2P platform</div><div class="desc">A platform turning <b>Renewable Energy Credits</b> into ERC-20 tokens — ZK-verified via the Reclaim protocol and a custom smart meter. Two <b>on-chain AI agents</b> automate transactions from natural language, with IPFS for off-chain storage.</div><div class="tags"><span class="tag">React</span><span class="tag">Solidity</span><span class="tag">zkEVM</span><span class="tag">IPFS</span><span class="tag">Firebase</span></div></div></div>
     <div class="entry"><div class="when">ML · Observability</div><div><div class="co">API Anomaly Detection</div><div class="role">Detection &amp; auto-resolution</div><div class="desc">A <b>FastAPI + ELK</b> tool aggregating logs with multimodal Snowflake Cortex insights. An <b>ensemble model</b> (LSTM 92%, Isolation Forest, Autoencoders) with SHAP explainability and <b>agentic GitHub Actions</b> for auto-resolution.</div><div class="tags"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">ELK</span><span class="tag">SHAP</span><span class="tag">Snowflake</span></div></div></div>
     <div class="entry"><div class="when">Research · Whitepaper</div><div><div class="co">PARAM Protocol</div><div class="role">Mechanism design</div><div class="desc">A <b>Predictive Autonomous Revenue Allocation Mechanism</b> — an on-chain protocol for autonomous, predictive revenue distribution. Plus an <b>XAI EfficientNet</b> pipeline for melanoma detection.</div><div class="tags"><span class="tag">Whitepaper</span><span class="tag">Mechanism Design</span><span class="tag">XAI</span></div></div></div>
   </section>
 
   <section class="section wrap" id="skills">
-    <p class="eyebrow">Skills</p>
+    <p class="shead"><span>03</span> <b>Skills</b></p>
     <div class="skills">
       <div class="skill-grp"><h3>Languages</h3><div class="row"><span>Python</span><span>TypeScript</span><span>JavaScript</span><span>Java</span><span>SQL</span><span>Solidity</span><span>.NET</span></div></div>
       <div class="skill-grp"><h3>AI / ML</h3><div class="row"><span>LLM Agents</span><span>Prompt Engineering</span><span>Claude Code</span><span>Ensemble Models</span><span>Scaling AI</span></div></div>
@@ -320,7 +330,7 @@ body.in-game #gameMode{display:block}
   </section>
 
   <section class="section wrap" id="honours">
-    <p class="eyebrow">Honours &amp; awards</p>
+    <p class="shead"><span>04</span> <b>Honours &amp; awards</b></p>
     <div class="honours">
       <div class="honour"><span>ETHMumbai 2025</span><span class="mark w">Winner</span></div>
       <div class="honour"><span>HackAurora · VJTI</span><span class="mark w">Winner</span></div>
@@ -344,7 +354,7 @@ body.in-game #gameMode{display:block}
   </section>
 
   <section class="section wrap" id="contact">
-    <p class="eyebrow">Get in touch</p>
+    <p class="shead"><span>05</span> <b>Get in touch</b></p>
     <div class="contact-grid">
       <a href="mailto:param.gogia06@gmail.com"><span class="k">Email</span><span class="v">param.gogia06@gmail.com <span class="arr">↗</span></span></a>
       <a href="https://linkedin.com/in/paramgogia" target="_blank" rel="noopener"><span class="k">LinkedIn</span><span class="v">in/paramgogia <span class="arr">↗</span></span></a>
@@ -354,9 +364,16 @@ body.in-game #gameMode{display:block}
     <p class="edu"><b>B.Tech — Computer Science (AI/ML)</b>, SPIT Mumbai · 2022–2026 · CGPA 9.47, Rank 2.<br>Minors in Management — <b>SPJIMR</b>. Available to start <b>July 2026</b>.</p>
   </section>
 
+  <section class="section wrap bored" id="bored">
+    <p class="shead"><span>06</span> <b>Bored?</b></p>
+    <h2>Tired of scrolling?<br>Fly through it instead.</h2>
+    <p>Same résumé, zero scrolling. Pilot a probe through a small universe and dock at stations to reveal each section.</p>
+    <button class="play js-game" id="enterGame">Launch the explorable universe <span class="ar">↗</span></button>
+  </section>
+
   <footer class="foot wrap">
     <span class="c">© 2026 Param Gogia · Mumbai, India</span>
-    <button class="play" id="enterGame2">Prefer to fly through it? Launch the explorable universe →</button>
+    <button class="top" id="toTop">Back to top ↑</button>
   </footer>
 
 </div>
@@ -470,9 +487,9 @@ function enterGame(){
 function exitGame(){
   document.body.classList.remove('in-game');
 }
-document.getElementById('enterGame').addEventListener('click',enterGame);
-document.getElementById('enterGame2').addEventListener('click',enterGame);
+document.querySelectorAll('.js-game').forEach(el=>el.addEventListener('click',enterGame));
 document.getElementById('exitGame').addEventListener('click',exitGame);
+document.getElementById('toTop')?.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
 
 /* ===================== explorable universe (boots lazily) ===================== */
 const STATIONS=[
